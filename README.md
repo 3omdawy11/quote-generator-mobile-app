@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # quote-generator-mobile-app
 
 Hello there, your task is to convert the following figma design into a mobile app:
@@ -18,3 +19,21 @@ So make sure that you have covered all the following tasks:
 That's all, fork the repository and start working on it.
 
 Best of luck.
+=======
+# quote_generator_intern
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+>>>>>>> 6cf6eec (test)
