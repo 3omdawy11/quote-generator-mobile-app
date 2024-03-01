@@ -16,7 +16,7 @@ class AppRouter {
 
       case kFavoriteScreen:
         return MaterialPageRoute(
-          builder: (context) => const FavoriteScreen(),
+          builder: (context) => FavoriteScreen(),
         );
     }
     return null;
