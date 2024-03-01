@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quote_generator_intern/data/model/quote_model.dart';
 import 'package:quote_generator_intern/features/favorite_screen/presentation/favorite_screen.dart';
 import 'package:quote_generator_intern/features/home_screen/presentation/home_screen.dart';
 
@@ -11,12 +13,15 @@ class AppRouter {
     switch (settings.name) {
       case kHomeScreen:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => ProviderScope(child: HomeScreen()),
         );
 
       case kFavoriteScreen:
+        final quotes = settings.arguments as List<Quote>;
         return MaterialPageRoute(
-          builder: (context) => FavoriteScreen(),
+          builder: (context) => FavoriteScreen(
+            favoriteQuotes: quotes,
+          ),
         );
     }
     return null;

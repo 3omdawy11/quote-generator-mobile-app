@@ -7,10 +7,10 @@ import 'package:quote_generator_intern/features/favorite_screen/presentation/wid
 import '../../../data/model/quote_model.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  FavoriteScreen({Key? key}) : super(key: key);
+  FavoriteScreen({Key? key, required this.favoriteQuotes}) : super(key: key);
 
   // Initialize quotes and searchedQuotes lists
-  late List<Quote> quotes = []; // Provide initial empty list
+  List<Quote> favoriteQuotes; // Provide initial empty list
   late List<Quote> searchedQuotes = []; // Provide initial empty list
 
   @override

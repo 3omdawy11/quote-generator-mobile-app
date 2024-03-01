@@ -40,9 +40,4 @@ const Border kButtonBorder = Border(
     bottom: kButtonBorderSide,
 );
 
-const BorderRadius kBorderRadius  = BorderRadius.only(
-topLeft: Radius.circular(6),
-topRight: Radius.circular(6),
-bottomLeft: Radius.circular(6),
-bottomRight: Radius.circular(6)
-);
+const BorderRadius kBorderRadius  = BorderRadius.all(Radius.circular(6));
