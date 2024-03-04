@@ -41,3 +41,4 @@ const Border kButtonBorder = Border(
 );
 
 const BorderRadius kBorderRadius  = BorderRadius.all(Radius.circular(6));
+const String kFavoriteBoxName = "favoriteQuotes";

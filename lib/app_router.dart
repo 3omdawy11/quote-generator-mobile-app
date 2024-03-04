@@ -13,7 +13,7 @@ class AppRouter {
     switch (settings.name) {
       case kHomeScreen:
         return MaterialPageRoute(
-          builder: (context) => ProviderScope(child: HomeScreen()),
+          builder: (context) =>  const HomeScreen(),
         );
 
       case kFavoriteScreen:
