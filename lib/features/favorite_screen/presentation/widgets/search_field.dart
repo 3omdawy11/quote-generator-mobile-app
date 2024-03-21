@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quote_generator_intern/constants.dart';
+import 'package:quote_generator_intern/features/favorite_screen/presentation/favorite_screen.dart';
 
 class SearchField extends StatelessWidget {
-  SearchField({super.key, required this.onChanged});
+  SearchField({super.key, required list});
   TextEditingController searchController = TextEditingController();
-  final Function() onChanged;
+  late List list;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +34,12 @@ class SearchField extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 22,
           ),
+            /*onTap: (){
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },*/
           onChanged: (searchController) {
 
           },

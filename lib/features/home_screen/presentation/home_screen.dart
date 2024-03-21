@@ -9,7 +9,6 @@ import 'package:quote_generator_intern/constants.dart';
 import 'package:quote_generator_intern/data/provider/quote_provider.dart';
 import 'package:quote_generator_intern/features/home_screen/cached_data/quotes_entity.dart';
 
-import '../../../data/model/quote_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({
@@ -22,7 +21,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late Box favoriteQuotesBox;
-  late List<QuoteEntity> favoriteList; // Initialize favoriteList
 
   @override
   void initState() {
@@ -30,27 +28,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     createBox();
   }
 
-  createBox(){
+  createBox() {
     favoriteQuotesBox = Hive.box<QuoteEntity>(kFavoriteBoxName);
     print(favoriteQuotesBox.values);
-    if (favoriteQuotesBox.isEmpty) {
-      favoriteList = <QuoteEntity>[];
-    } else {
-      favoriteList = favoriteQuotesBox.values.toList() as List<QuoteEntity>;
-    }
-    print(favoriteList.length);
     setState(() {});
   }
 
-
   void saveData(QuoteEntity quote) {
-    final index = favoriteList.indexWhere((element) => element.content == quote.content);
+    final index = favoriteQuotesBox.values
+        .toList()
+        .indexWhere((element) => element.content == quote.content);
     if (favoriteQuotesBox.containsKey(quote.id)) {
       favoriteQuotesBox.delete(quote.id);
-      favoriteList.removeAt(index);
+      favoriteQuotesBox.values.toList().removeAt(index);
     } else {
-      favoriteQuotesBox.put(quote.id, quote); // Assuming QuoteEntity has a constructor that takes content
-      favoriteList.add(quote);
+      favoriteQuotesBox.put(quote.id,
+          quote); // Assuming QuoteEntity has a constructor that takes content
+      favoriteQuotesBox.values.toList().add(quote);
     }
     setState(() {});
   }
@@ -79,10 +73,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       alignment: Alignment.topRight,
                       children: [
                         InkWell(
-                          onTap: () {
-                            print(favoriteList.length);
-                            Navigator.pushNamed(context, kFavoriteScreen,
-                                arguments: favoriteList);
+                          onTap: () async {
+                            print(favoriteQuotesBox.length);
+                            await Navigator.pushNamed(context, kFavoriteScreen,
+                                arguments: favoriteQuotesBox);
+                            setState(() {
+
+                            });
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.10,
@@ -113,11 +110,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             width: 32,
                             decoration: const BoxDecoration(
                               color: Color(0xFF323232),
-                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
                             child: Center(
                               child: Text(
-                                "${favoriteList.length}",
+                                "${favoriteQuotesBox.values.toList().length}",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
@@ -143,7 +141,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           children: [
                             Center(
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.14,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.14,
                                 child: SingleChildScrollView(
                                   child: Text(
                                     quoteList[index].content,
@@ -177,7 +176,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 InkWell(
-                                  borderRadius: const BorderRadius.all(Radius.circular(2)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(2)),
                                   onTap: () {
                                     index = Random().nextInt(quoteList.length);
                                     setState(() {});
@@ -186,13 +186,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     height: 50,
                                     width: 220,
                                     decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6)),
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(6)),
                                       color: kButtonGeneratorColor,
                                     ),
                                     child: const Center(
                                       child: Text(
                                         'Generate Another Quote',
-                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
                                       ),
                                     ),
                                   ),
@@ -206,7 +208,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     width: 90,
                                     decoration: const BoxDecoration(
                                       border: kButtonBorder,
-                                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6)),
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(6)),
                                       color: Colors.white,
                                     ),
                                     child: const Icon(

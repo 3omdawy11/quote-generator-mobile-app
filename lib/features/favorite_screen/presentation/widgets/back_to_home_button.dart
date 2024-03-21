@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:quote_generator_intern/constants.dart';
 
 class BackToHomeButton extends StatelessWidget {
-  const BackToHomeButton({Key? key});
+  const BackToHomeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class BackToHomeButton extends StatelessWidget {
         IconButton(
           icon: const Icon(CupertinoIcons.back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, kHomeScreen);
           },
         ), // Adjust the space between icon and text
 // Text Widget
